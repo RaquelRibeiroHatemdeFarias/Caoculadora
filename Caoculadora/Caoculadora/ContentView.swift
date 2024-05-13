@@ -20,19 +20,23 @@ struct ContentView: View {
     var body: some View {
         VStack (alignment: .leading, spacing: 24){
             Text("Qual é a idade do seu cão?")
+                .font(.header5)
             Text("Anos")
+                .font(.body1)
             TextField(
             "Quantos anos completos tem seu cão",
             value: $years,
             format: .number
             )
             Text("Meses")
+                .font(.body1)
             TextField(
             "Quantos meses ele tem",
             value: $months,
             format: .number
             )
             Text("Porte")
+                .font(.body1)
             // Aqui vai o segmentes control
             Picker("Portes", selection: $porteSelected){
                 ForEach(Porte.allCases, id:\.self) { porte in 
@@ -47,7 +51,9 @@ struct ContentView: View {
             
             if let result {
                 Text("Seu cachorro tem , em idade humana...")
+                    .font(.body1)
                 Text("\(result) anos")
+                    .font(.display)
             } else {
                 Image(ImageResource.clarinha)
                     .resizable()
@@ -65,7 +71,7 @@ struct ContentView: View {
             .background(.indigo)
             .foregroundStyle(.white)
             .clipShape(RoundedRectangle(cornerRadius: 10))
-            .bold()
+            .font(.body1)
         }
         
         .textFieldStyle(.roundedBorder)
