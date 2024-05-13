@@ -15,6 +15,7 @@ struct ContentView: View {
     
     let portes = ["Pequeno", "Médio", "Grande"]
     @State var porteSelecionado = "Pequeno"
+    @State var porteSelected = Porte.pequeno
     
     var body: some View {
         VStack (alignment: .leading, spacing: 24){
@@ -32,8 +33,10 @@ struct ContentView: View {
             format: .number
             )
             Text("Porte")
-            Picker("Portes", selection: $porteSelecionado){
-                ForEach(portes, id:\.self) { porte in Text(porte)
+            // Aqui vai o segmentes control
+            Picker("Portes", selection: $porteSelected){
+                ForEach(Porte.allCases, id:\.self) { porte in 
+                    Text(porte.rawValue)
                 }
             }
             .pickerStyle(.segmented)
@@ -90,15 +93,13 @@ struct ContentView: View {
         //        *medio: 7
         //        *grande: 8
         let multiplicador: Int
-        switch porteSelecionado{
-        case "Pequeno":
+        switch porteSelected {
+        case .pequeno:
             multiplicador = 6
-        case "Médio":
+        case .medio:
             multiplicador = 7
-        case "Grande":
+        case .grande:
             multiplicador = 8
-        default:
-            multiplicador = 0
         }
         result = years*multiplicador + months*multiplicador/12
     }
