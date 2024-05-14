@@ -108,6 +108,9 @@ struct ContentView: View {
             multiplicador = 8
         }
         result = years*multiplicador + months*multiplicador/12
+        
+        result = porteSelected.calcularIdade(deAnos: years,
+                                             eMeses: months)
     }
 }
 
