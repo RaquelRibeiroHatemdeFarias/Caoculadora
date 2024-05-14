@@ -54,10 +54,13 @@ struct ContentView: View {
                     Spacer()
                     
                     if let result {
-                        Text("Seu cachorro tem , em idade humana...")
+                        Text("Seu cachorro tem, em idade humana...")
                             .font(.body1)
+                            .frame(maxWidth: .infinity)
                         Text("\(result) anos")
                             .font(.display)
+                            .frame(maxWidth: .infinity)
+                            .contentTransition(.numericText())
                     } else {
                         Image(ImageResource.clarinha)
                             .resizable()
@@ -81,10 +84,11 @@ struct ContentView: View {
                 .keyboardType(.numberPad)
                 .padding()
                 .containerRelativeFrame(.vertical)
+               // .animation(.easeInOut.speed(0.5), value: result)
             }
             .navigationTitle("Cãoculadora")
             .scrollDismissesKeyboard(.immediately)
-            .toolbarBackground(.indigo, for: .navigationBar)
+            .toolbarBackground(.indigo600, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbarColorScheme(.dark, for: .navigationBar)
         }
@@ -107,9 +111,11 @@ extension ContentView {
             print("Pelo menos um campo deve ser maior que zero.")
             return
         }
-            
-        result = porteSelected.calcularIdade(deAnos: years,
+         
+        withAnimation(.easeInOut.speed(0.5)) {
+            result = porteSelected.calcularIdade(deAnos: years,
                                                  eMeses: months)
+        }
     }
 }
    
