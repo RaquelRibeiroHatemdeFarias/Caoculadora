@@ -14,6 +14,8 @@ struct ContentView: View {
     @State var result: Int?
     
     @State var porteSelected = Porte.pequeno
+    @State var failedInput = false
+    let tituloPreecnherCampo = "Preencha os campos para cãocular!"
     
     var body: some View {
         NavigationStack {
@@ -86,6 +88,9 @@ struct ContentView: View {
                 .containerRelativeFrame(.vertical)
                // .animation(.easeInOut.speed(0.5), value: result)
             }
+            .alert(tituloPreecnherCampo, isPresented: $failedInput, actions: {
+                Button("OK", role: .cancel, action: {})
+            })
             .navigationTitle("Cãoculadora")
             .scrollDismissesKeyboard(.immediately)
             .toolbarBackground(.indigo600, for: .navigationBar)
@@ -103,6 +108,7 @@ extension ContentView {
             
         guard let years, let months else {
             print("campos não preenchidos")
+            failedInput = true
             return
         }
             
